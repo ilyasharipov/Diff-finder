@@ -1,7 +1,8 @@
 {
     "name": "yanepenb/gendiff",
     "description": "Utility for finding differences in configuration files.",
-    "type": "gendiff, cli, parser, project",
+    "keywords": ["gendiff", "cli", "parser"],
+    "type": "project",
     "authors": [
         {
             "name": "Ilya Sharipov",
