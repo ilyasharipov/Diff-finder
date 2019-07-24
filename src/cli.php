@@ -1,6 +1,8 @@
 <?php
 
-namespace DiffFinder\Cli;
+namespace DiffFinder\cli;
+
+use function DiffFinder\differ\genDiff;
 
 const DOC = <<<DOC
 Generate diff
@@ -18,4 +20,6 @@ DOC;
 function run()
 {
     $args = \Docopt::handle(DOC);
+    $diffData = genDiff($args->args['<firstFile>'], $args->args['<secondFile>']);
+    print_r($diffData . PHP_EOL);
 }
