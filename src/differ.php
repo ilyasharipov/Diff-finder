@@ -60,7 +60,8 @@ function getRender($data) //buildOutput
         } elseif ($item['status'] === 'deleted') {
             $acc .= " - " . $item['key'] . ": " . boolToString($item['value']) . "\n";
         } elseif ($item['status'] === 'changed') {
-            $acc .= " + " . $item['key'] . ": " . boolToString($item['modified']) . "\n" . " - " . $item['key'] . ": " . boolToString($item['previous']) . "\n";
+            $acc .= " + " . $item['key'] . ": " . boolToString($item['modified']) . "\n" .
+            " - " . $item['key'] . ": " . boolToString($item['previous']) . "\n";
         } elseif ($item['status'] === 'unchanged') {
             $acc .= "   " . $item['key'] . ": " . boolToString($item['value']) . "\n";
         }
