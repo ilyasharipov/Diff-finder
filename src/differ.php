@@ -8,11 +8,10 @@ function genDiff($firstFile, $secondFile)
 {
     $jsoncontent1 = file_get_contents($firstFile);
     $jsoncontent2 = file_get_contents($secondFile);
-    //print_r($jsoncontent1);
+
     $jsondecode1 = json_decode($jsoncontent1, true);
     $jsondecode2 = json_decode($jsoncontent2, true);
-    //print_r($aa);
-    //print_r($bb);
+
     $dataResult = getDiff($jsondecode1, $jsondecode2);
     return getRender($dataResult);
 }
@@ -50,28 +49,34 @@ function getDiff($data1, $data2)
         }
     }, $keys);
       
-  
     return $result;
 }
 
-//print_r($dataResult);
-
-function getRender($data)
+function getRender($data) //buildOutput
 {
     $result = array_reduce($data, function ($acc, $item) {
         if ($item['status'] === 'added') {
-            $acc = "{$acc} + {$item['key']}: {$item['value']}\n";
+            $acc .= " + " . $item['key'] . ": " . boolToString($item['value']) . "\n";
         } elseif ($item['status'] === 'deleted') {
-            $acc = "{$acc} - {$item['key']}: {$item['value']}\n";
+            $acc .= " - " . $item['key'] . ": " . boolToString($item['value']) . "\n";
         } elseif ($item['status'] === 'changed') {
-            $acc = "{$acc} + {$item['key']}: {$item['modified']}\n - {$item['key']}: {$item['previous']}\n";
+            $acc .= " + " . $item['key'] . ": " . boolToString($item['modified']) . "\n" . " - " . $item['key'] . ": " . boolToString($item['previous']) . "\n";
         } elseif ($item['status'] === 'unchanged') {
-            $acc = "{$acc}   {$item['key']}: {$item['value']}\n";
+            $acc .= "   " . $item['key'] . ": " . boolToString($item['value']) . "\n";
         }
-    //print_r($acc);
     
         return $acc;
     }, '');
-  //print_r($result);
+
     return "{" . "\n" . $result . "}";
+}
+
+
+function boolToString($value)
+{
+    if (is_bool($value)) {
+        return $value === true ? 'true' : 'false';
+    }
+
+    return $value;
 }
