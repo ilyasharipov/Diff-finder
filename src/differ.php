@@ -3,21 +3,28 @@
 namespace DiffFinder\differ;
 
 use function \Funct\Collection\union;
+use function DiffFinder\parser\getFileFormatData;
 
 function genDiff($firstFile, $secondFile)
 {
-    $jsoncontent1 = file_get_contents($firstFile);
-    $jsoncontent2 = file_get_contents($secondFile);
+    $firstFileFormat = pathinfo($firstFile, PATHINFO_EXTENSION);
+    $secondFileFormat = pathinfo($secondFile, PATHINFO_EXTENSION);
 
-    $jsondecode1 = json_decode($jsoncontent1, true);
-    $jsondecode2 = json_decode($jsoncontent2, true);
+    $firstFileData = file_get_contents($firstFile);
+    $secondFileData = file_get_contents($secondFile);
 
-    $dataResult = getDiff($jsondecode1, $jsondecode2);
-    return getRender($dataResult);
+    $firstFileDataDecode = getFileFormatData($firstFileData, $firstFileFormat);
+    $secondFileDataDecode = getFileFormatData($secondFileData, $secondFileFormat);
+
+    $dataFileResult = getDiff($firstFileDataDecode, $secondFileDataDecode);
+    return getRender($dataFileResult);
 }
 
-function getDiff($data1, $data2)
+function getDiff($f1, $f2)
 {
+    $data1 = get_object_vars($f1);
+    $data2 = get_object_vars($f2);
+    print_r($data1);
     $keys = union(array_keys($data1), array_keys($data2));
 
     $result = array_map(function ($key) use ($data1, $data2) {
