@@ -8,7 +8,7 @@ function getAst($f1, $f2)
 {
     $data1 = get_object_vars($f1);
     $data2 = get_object_vars($f2);
-    print_r($data1);
+    //print_r($data1);
     $keys = union(array_keys($data1), array_keys($data2));
 
     $result = array_map(function ($key) use ($data1, $data2) {

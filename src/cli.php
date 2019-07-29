@@ -20,6 +20,6 @@ DOC;
 function run()
 {
     $args = \Docopt::handle(DOC);
-    $diffData = genDiff($args->args['<firstFile>'], $args->args['<secondFile>']);
+    $diffData = genDiff($args['<firstFile>'], $args['<secondFile>']);
     print_r($diffData . PHP_EOL);
 }
