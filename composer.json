@@ -20,7 +20,9 @@
         "files": [
             "src/cli.php",
             "src/differ.php",
-            "src/parser.php"
+            "src/parser.php",
+            "src/AstBuilder.php",
+            "src/output.php"
         ]
     },
     "bin": [
