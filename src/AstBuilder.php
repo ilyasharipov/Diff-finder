@@ -48,7 +48,7 @@ function getAst(object $beforeFile, object $afterFile) : array
                 $acc[] = buildNode($key, $beforeValue, $afterValue, 'changed', null);
             } elseif ($beforeValue === $afterValue) {
                 $acc[] = buildNode($key, $afterValue, $afterValue, 'unchanged', null);
-            } 
+            }
         }
         
         return $acc;
