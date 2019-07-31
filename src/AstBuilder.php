@@ -4,52 +4,55 @@ namespace DiffFinder\AstBuilder;
 
 use function \Funct\Collection\union;
 
-// function buildNode($node)
-// {
-//     if (is_array($node) {
-//         return getAst();
-//     }
-// }
-
-function getAst($f1, $f2)
+function buildNode($key, $beforeValue, $afterValue, $status, $children)
 {
-    $data1 = get_object_vars($f1);
-    $data2 = get_object_vars($f2);
+    return [
+        'key' => $key,
+        'beforeValue' => $beforeValue,
+        'afterValue' => $afterValue,
+        'status' => $status,
+        'children' => $children
+    ];
+}
 
-    //print_r($data1);
+function boolToString($value)
+{
+    if (is_bool($value)) {
+        return $value === true ? 'true' : 'false';
+    }
 
-    $keys = union(array_keys($data1), array_keys($data2));
+    return $value;
+}
 
-    $result = array_reduce($keys, function ($acc, $key) use ($data1, $data2) {
-        if (!isset($data1[$key])) {
-            $acc[] = [
-            'key' => $key,
-            'value' => is_object($data2[$key]) ? getAst($data2[$key], $data2[$key]) : $data2[$key],
-            'status' => 'added'
-            ];
-        } elseif (!isset($data2[$key])) {
-            $acc[] = [
-            'key' => $key,
-            'value' => is_object($data1[$key]) ? getAst($data1[$key], $data1[$key]) : $data1[$key],
-            'status' => 'deleted'
-            ];
-        } elseif ($data1[$key] === $data2[$key]) {
-            $acc[] = [
-            'key' => $key,
-            'value' => is_object($data1[$key]) ? getAst($data1[$key], $data2[$key]) : $data1[$key],
-            'status' => 'unchanged'
-            ];
-        } elseif ($data1[$key] !== $data2[$key]) {
-            $acc[] = [
-            'key' => $key,
-            'modified' => is_object($data2[$key]) ? getAst($data2[$key], $data1[$key]) : $data2[$key],
-            'previous' => is_object($data1[$key]) ? getAst($data1[$key], $data2[$key]) : $data1[$key],
-            'status' => 'changed'
-            ];
+function getAst(object $beforeFile, object $afterFile) : array
+{
+    $beforeFileData = get_object_vars($beforeFile);
+    $afterFileData = get_object_vars($afterFile);
+
+    $keys = union(array_keys($beforeFileData), array_keys($afterFileData));
+
+    $ast = array_reduce($keys, function ($acc, $key) use ($beforeFileData, $afterFileData) {
+        $beforeValue = $beforeFileData[$key] ?? null;
+        $afterValue = $afterFileData[$key] ?? null;
+        $beforeValue = boolToString($beforeValue);
+        $afterValue = boolToString($afterValue);
+
+        if (!isset($beforeValue)) {
+            $acc[] = buildNode($key, null, $afterValue, 'added', null);
+        } elseif (!isset($afterValue)) {
+            $acc[] = buildNode($key, $beforeValue, null, 'deleted', null);
+        } elseif (isset($beforeValue) && isset($afterValue)) {
+            if (is_object($beforeValue) && is_object($afterValue)) {
+                $acc[] = buildNode($key, null, null, 'nested', getAst($beforeValue, $afterValue));
+            } elseif ($beforeValue !== $afterValue) {
+                $acc[] = buildNode($key, $beforeValue, $afterValue, 'changed', null);
+            } elseif ($beforeValue === $afterValue) {
+                $acc[] = buildNode($key, $afterValue, $afterValue, 'unchanged', null);
+            } 
         }
         
         return $acc;
     }, []);
       
-    return $result;
+    return $ast;
 }
