@@ -24,7 +24,7 @@ function boolToString($value)
     return $value;
 }
 
-function getAst(object $beforeFile, object $afterFile) : array
+function getAst($beforeFile, $afterFile)
 {
     $beforeFileData = get_object_vars($beforeFile);
     $afterFileData = get_object_vars($afterFile);
@@ -32,6 +32,7 @@ function getAst(object $beforeFile, object $afterFile) : array
     $keys = union(array_keys($beforeFileData), array_keys($afterFileData));
 
     $ast = array_reduce($keys, function ($acc, $key) use ($beforeFileData, $afterFileData) {
+
         $beforeValue = $beforeFileData[$key] ?? null;
         $afterValue = $afterFileData[$key] ?? null;
         $beforeValue = boolToString($beforeValue);
@@ -44,15 +45,16 @@ function getAst(object $beforeFile, object $afterFile) : array
         } elseif (isset($beforeValue) && isset($afterValue)) {
             if (is_object($beforeValue) && is_object($afterValue)) {
                 $acc[] = buildNode($key, null, null, 'nested', getAst($beforeValue, $afterValue));
-            } elseif ($beforeValue !== $afterValue) {
-                $acc[] = buildNode($key, $beforeValue, $afterValue, 'changed', null);
-            } elseif ($beforeValue === $afterValue) {
-                $acc[] = buildNode($key, $afterValue, $afterValue, 'unchanged', null);
+            } else {
+                if ($beforeValue === $afterValue) {
+                    $acc[] = buildNode($key, $beforeValue, null, 'unchanged', null);
+                } else {
+                    $acc[] = buildNode($key, $beforeValue, $afterValue, 'changed', null);
+                }
             }
         }
         
         return $acc;
     }, []);
-      
     return $ast;
 }

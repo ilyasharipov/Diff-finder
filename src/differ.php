@@ -18,7 +18,7 @@ function genDiff($firstFile, $secondFile)
     $secondFileDataDecode = getFileFormatData($secondFileData, $secondFileFormat);
 
     $dataFileResult = getAst($firstFileDataDecode, $secondFileDataDecode);
-    print_r($dataFileResult);
-    //getRender($dataFileResult)
+    // print_r($dataFileResult);
+    // getRender($dataFileResult)
     return getRender($dataFileResult);
 }
