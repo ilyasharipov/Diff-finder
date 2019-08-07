@@ -5,8 +5,9 @@ namespace DiffFinder\differ;
 use function DiffFinder\parser\getFileFormatData;
 use function DiffFinder\AstBuilder\getAst;
 use function DiffFinder\Render\getRender;
+use function  DiffFinder\format\Plain\getPlainData;
 
-function genDiff($firstFile, $secondFile)
+function genDiff($firstFile, $secondFile, $format = 'all')
 {
     $firstFileFormat = pathinfo($firstFile, PATHINFO_EXTENSION);
     $secondFileFormat = pathinfo($secondFile, PATHINFO_EXTENSION);
@@ -18,7 +19,10 @@ function genDiff($firstFile, $secondFile)
     $secondFileDataDecode = getFileFormatData($secondFileData, $secondFileFormat);
 
     $dataFileResult = getAst($firstFileDataDecode, $secondFileDataDecode);
-    // print_r($dataFileResult);
-    // getRender($dataFileResult)
-    return getRender($dataFileResult);
+
+    if ($format === 'plain') {
+        return getPlainData($dataFileResult);
+    } elseif ($format === 'all') {
+        return getRender($dataFileResult);
+    }
 }

@@ -22,7 +22,8 @@
             "src/differ.php",
             "src/parser.php",
             "src/AstBuilder.php",
-            "src/output.php"
+            "src/output.php",
+            "src/format/plain.php"
         ]
     },
     "bin": [
