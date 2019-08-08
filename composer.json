@@ -21,9 +21,10 @@
             "src/cli.php",
             "src/differ.php",
             "src/parser.php",
-            "src/AstBuilder.php",
+            "src/ast.php",
             "src/output.php",
-            "src/format/plain.php"
+            "src/format/plain.php",
+            "src/format/json.php"
         ]
     },
     "bin": [

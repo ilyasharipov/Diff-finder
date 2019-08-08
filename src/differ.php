@@ -6,6 +6,7 @@ use function DiffFinder\parser\getFileFormatData;
 use function DiffFinder\AstBuilder\getAst;
 use function DiffFinder\Render\getRender;
 use function  DiffFinder\format\Plain\getPlainData;
+use function  DiffFinder\format\Json\getJson;
 
 function genDiff($firstFile, $secondFile, $format = 'all')
 {
@@ -22,6 +23,8 @@ function genDiff($firstFile, $secondFile, $format = 'all')
 
     if ($format === 'plain') {
         return getPlainData($dataFileResult);
+    } elseif ($format === 'json') {
+        return getJson($dataFileResult);
     } elseif ($format === 'all') {
         return getRender($dataFileResult);
     }
