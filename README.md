@@ -11,18 +11,18 @@ composer global require yanepenb/gendiff
 ```
 ![install](https://i.imgur.com/SSWJqvL.gif)
 
-##Example gendiff flat files *.json *.json
+## Example gendiff flat files *.json *.json
 ![install](https://i.imgur.com/iUHfey4.gif)
 
-##Example gendiff *.yaml *.yaml
+## Example gendiff *.yaml *.yaml
 ![install](https://i.imgur.com/QcHD0qP.gif)
 
-##Example gendiff nested files *.json *.json and *.yaml *.yaml
+## Example gendiff nested files *.json *.json and *.yaml *.yaml
 ![install](https://i.imgur.com/7ZM73ea.gif)
 ![install](https://i.imgur.com/K2ZT0qI.gif)
 
-##Example gendiff plain format *.(json/yaml) *.(json/yaml) --format plain
+## Example gendiff plain format *.(json/yaml) *.(json/yaml) --format plain
 ![install](https://i.imgur.com/hGOumv1.gif)
 
-##Example gendiff json format *.(json/yaml) *.(json/yaml) --format json
+## Example gendiff json format *.(json/yaml) *.(json/yaml) --format json
 ![install](https://i.imgur.com/1XE2Zqu.gif)
