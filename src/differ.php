@@ -25,7 +25,7 @@ function genDiff($firstFile, $secondFile, $format = 'all')
         return getPlainData($dataFileResult);
     } elseif ($format === 'json') {
         return getJson($dataFileResult);
-    } elseif ($format === 'all') {
-        return getRender($dataFileResult);
     }
+    
+    return getRender($dataFileResult);
 }

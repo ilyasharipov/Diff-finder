@@ -21,5 +21,5 @@ function run()
 {
     $args = \Docopt::handle(DOC);
     $diffData = genDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
-    print_r($diffData . PHP_EOL);
+    echo $diffData . PHP_EOL;
 }
