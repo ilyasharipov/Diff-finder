@@ -21,6 +21,7 @@ function getRender($ast, $depth = 0)
 
         return $acc;
     }, []);
+
     $strResult = implode("\n", $result);
     return "{" . "\n" . $strResult . "\n" . $indent . "}";
 }
@@ -39,7 +40,6 @@ function arrToString($data, $depth)
 
         return $acc;
     }, []);
-
 
     $strResult = implode("\n", $result);
     return $indent . "    " . $strResult . "\n" . "    " . $indent . "}";

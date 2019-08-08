@@ -19,6 +19,7 @@ function getPlainData($ast, $nestedPart = "")
 
         return $acc;
     }, []);
+    
     $strResult = implode("\n", $result);
     return $strResult;
 }

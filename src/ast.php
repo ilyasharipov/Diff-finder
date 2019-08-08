@@ -56,5 +56,6 @@ function getAst($beforeFile, $afterFile)
         
         return $acc;
     }, []);
+    
     return $ast;
 }
