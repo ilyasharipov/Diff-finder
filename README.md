@@ -9,26 +9,20 @@ Utility for finding differences in configuration files.
 ```
 composer global require yanepenb/gendiff
 ```
-![install](https://imgur.com/SSWJqvL)
-
-## **How to install:**
-```
-composer global require yanepenb/gendiff
-```
-![install](https://imgur.com/SSWJqvL)
+![install](https://i.imgur.com/SSWJqvL.gif)
 
 ##Example gendiff flat files *.json *.json
-![install](https://imgur.com/iUHfey4)
+![install](https://i.imgur.com/iUHfey4.gif)
 
 ##Example gendiff *.yaml *.yaml
-![install](https://imgur.com/QcHD0qP)
+![install](https://i.imgur.com/QcHD0qP.gif)
 
 ##Example gendiff nested files *.json *.json and *.yaml *.yaml
-![install](https://imgur.com/7ZM73ea)
-![install](https://imgur.com/K2ZT0qI)
+![install](https://i.imgur.com/7ZM73ea.gif)
+![install](https://i.imgur.com/K2ZT0qI.gif)
 
 ##Example gendiff plain format *.(json/yaml) *.(json/yaml) --format plain
-![install](https://imgur.com/hGOumv1)
+![install](https://i.imgur.com/hGOumv1.gif)
 
 ##Example gendiff json format *.(json/yaml) *.(json/yaml) --format json
-![install](https://imgur.com/1XE2Zqu)
+![install](https://i.imgur.com/1XE2Zqu.gif)
