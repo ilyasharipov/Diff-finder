@@ -2,7 +2,7 @@
 
 namespace DiffFinder\formatters\json;
 
-function getJson($ast)
+function getJsonData($ast)
 {
     return json_encode($ast, JSON_PRETTY_PRINT);
 }

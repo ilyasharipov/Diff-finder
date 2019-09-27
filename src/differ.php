@@ -2,30 +2,30 @@
 
 namespace DiffFinder\differ;
 
-use function DiffFinder\parser\getFileFormatData;
+use function DiffFinder\parser\getFormatData;
 use function DiffFinder\AstBuilder\getAst;
 use function DiffFinder\formatters\plain\getPlainData;
-use function DiffFinder\formatters\json\getJson;
-use function DiffFinder\formatters\pretty\getPretty;
+use function DiffFinder\formatters\json\getJsonData;
+use function DiffFinder\formatters\pretty\getPrettyData;
 
-function genDiff($firstFile, $secondFile, $format = 'all')
+function genDiff($firstData, $secondData, $format = 'all')
 {
-    $firstFileFormat = pathinfo($firstFile, PATHINFO_EXTENSION);
-    $secondFileFormat = pathinfo($secondFile, PATHINFO_EXTENSION);
+    $firstDataFormat = pathinfo($firstData, PATHINFO_EXTENSION);
+    $secondDataFormat = pathinfo($secondData, PATHINFO_EXTENSION);
 
-    $firstFileData = file_get_contents($firstFile);
-    $secondFileData = file_get_contents($secondFile);
+    $firstDataContent = file_get_contents($firstData);
+    $secondDataContent = file_get_contents($secondData);
 
-    $firstFileDataDecode = getFileFormatData($firstFileData, $firstFileFormat);
-    $secondFileDataDecode = getFileFormatData($secondFileData, $secondFileFormat);
+    $firstDataDecode = getFormatData($firstDataContent, $firstDataFormat);
+    $secondDataDecode = getFormatData($secondDataContent, $secondDataFormat);
 
-    $dataFileResult = getAst($firstFileDataDecode, $secondFileDataDecode);
+    $dataFileResult = getAst($firstDataDecode, $secondDataDecode);
 
     if ($format === 'plain') {
         return getPlainData($dataFileResult);
     } elseif ($format === 'json') {
-        return getJson($dataFileResult);
+        return getJsonData($dataFileResult);
     }
     
-    return getPretty($dataFileResult);
+    return getPrettyData($dataFileResult);
 }

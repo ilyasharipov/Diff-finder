@@ -4,7 +4,7 @@ namespace DiffFinder\parser;
 
 use Symfony\Component\Yaml\Yaml;
 
-function getFileFormatData($data, $dataFormat)
+function getFormatData($data, $dataFormat)
 {
     if ($dataFormat === 'json') {
         return json_decode($data);
