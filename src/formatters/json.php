@@ -1,6 +1,6 @@
 <?php
 
-namespace DiffFinder\format\Json;
+namespace DiffFinder\formatters\json;
 
 function getJson($ast)
 {

@@ -4,9 +4,9 @@ namespace DiffFinder\differ;
 
 use function DiffFinder\parser\getFileFormatData;
 use function DiffFinder\AstBuilder\getAst;
-use function DiffFinder\Render\getRender;
-use function  DiffFinder\format\Plain\getPlainData;
-use function  DiffFinder\format\Json\getJson;
+use function DiffFinder\formatters\plain\getPlainData;
+use function DiffFinder\formatters\json\getJson;
+use function DiffFinder\formatters\pretty\getPretty;
 
 function genDiff($firstFile, $secondFile, $format = 'all')
 {
@@ -27,5 +27,5 @@ function genDiff($firstFile, $secondFile, $format = 'all')
         return getJson($dataFileResult);
     }
     
-    return getRender($dataFileResult);
+    return getPretty($dataFileResult);
 }

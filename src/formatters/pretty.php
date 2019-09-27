@@ -1,8 +1,8 @@
 <?php
 
-namespace DiffFinder\Render;
+namespace DiffFinder\formatters\pretty;
 
-function getRender($ast, $depth = 0)
+function getPretty($ast, $depth = 0)
 {
     $indent = str_repeat("    ", $depth);
     $result = array_reduce($ast, function ($acc, $node) use ($indent, $depth) {
@@ -16,7 +16,7 @@ function getRender($ast, $depth = 0)
         } elseif ($node["status"] === 'unchanged') {
             $acc[] = $indent . "    " . $node['key'] . ": " . objectToStr($node["beforeValue"], $depth);
         } elseif ($node["status"] === "nested") {
-            $acc[] = $indent . "    " . $node['key'] . ": " . getRender($node['children'], $depth + 1);
+            $acc[] = $indent . "    " . $node['key'] . ": " . getPretty($node['children'], $depth + 1);
         }
 
         return $acc;

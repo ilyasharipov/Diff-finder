@@ -1,6 +1,6 @@
 <?php
 
-namespace DiffFinder\format\Plain;
+namespace DiffFinder\formatters\plain;
 
 function getPlainData($ast, $nestedPart = "")
 {

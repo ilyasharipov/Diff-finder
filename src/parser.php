@@ -4,11 +4,11 @@ namespace DiffFinder\parser;
 
 use Symfony\Component\Yaml\Yaml;
 
-function getFileFormatData($data, $fileFormat)
+function getFileFormatData($data, $dataFormat)
 {
-    if ($fileFormat === 'json') {
+    if ($dataFormat === 'json') {
         return json_decode($data);
-    } elseif ($fileFormat === 'yml') {
+    } elseif ($dataFormat === 'yml') {
         return Yaml::parse($data, Yaml::PARSE_OBJECT_FOR_MAP);
     }
 }

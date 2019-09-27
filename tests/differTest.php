@@ -5,7 +5,7 @@ namespace DiffFinder\Tests;
 use function DiffFinder\differ\genDiff;
 use PHPUnit\Framework\TestCase;
 
-class differTest extends TestCase
+class DifferTest extends TestCase
 {
     public function testGetDiffJson()
     {
