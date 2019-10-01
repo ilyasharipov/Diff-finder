@@ -19,13 +19,18 @@ function genDiff($firstData, $secondData, $format = 'all')
     $firstDataDecode = getFormatData($firstDataContent, $firstDataFormat);
     $secondDataDecode = getFormatData($secondDataContent, $secondDataFormat);
 
-    $dataFileResult = getAst($firstDataDecode, $secondDataDecode);
+    $dataResult = getAst($firstDataDecode, $secondDataDecode);
 
+    return choseFormatData($dataResult, $format);
+}
+
+function choseFormatData($dataResult, $format)
+{
     if ($format === 'plain') {
-        return getPlainData($dataFileResult);
+        return getPlainData($dataResult);
     } elseif ($format === 'json') {
-        return getJsonData($dataFileResult);
+        return getJsonData($dataResult);
     }
-    
-    return getPrettyData($dataFileResult);
+
+    return getPrettyData($dataResult);
 }

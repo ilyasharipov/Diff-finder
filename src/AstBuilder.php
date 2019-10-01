@@ -4,13 +4,13 @@ namespace DiffFinder\AstBuilder;
 
 use function \Funct\Collection\union;
 
-function buildNode($key, $beforeValue, $afterValue, $status, $children)
+function buildNode($key, $beforeValue, $afterValue, $type, $children)
 {
     return [
         'key' => $key,
         'beforeValue' => $beforeValue,
         'afterValue' => $afterValue,
-        'status' => $status,
+        'type' => $type,
         'children' => $children
     ];
 }

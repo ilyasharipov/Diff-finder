@@ -6,16 +6,16 @@ function getPrettyData($ast, $depth = 0)
 {
     $indent = str_repeat("    ", $depth);
     $result = array_reduce($ast, function ($acc, $node) use ($indent, $depth) {
-        if ($node["status"] === "added") {
+        if ($node["type"] === "added") {
             $acc[] = $indent . "  + " . $node["key"] . ": " . objectToStr($node["afterValue"], $depth);
-        } elseif ($node["status"] === "deleted") {
+        } elseif ($node["type"] === "deleted") {
             $acc[] = $indent . "  - " . $node["key"] . ": " . objectToStr($node["beforeValue"], $depth);
-        } elseif ($node["status"] === "changed") {
+        } elseif ($node["type"] === "changed") {
             $acc[] =  $indent . "  + " . $node['key'] . ": " . objectToStr($node["afterValue"], $depth) . "\n" .
             $indent . "  - " . $node["key"] . ": " . objectToStr($node["beforeValue"], $depth);
-        } elseif ($node["status"] === 'unchanged') {
+        } elseif ($node["type"] === 'unchanged') {
             $acc[] = $indent . "    " . $node['key'] . ": " . objectToStr($node["beforeValue"], $depth);
-        } elseif ($node["status"] === "nested") {
+        } elseif ($node["type"] === "nested") {
             $acc[] = $indent . "    " . $node['key'] . ": " . getPrettyData($node['children'], $depth + 1);
         }
 
