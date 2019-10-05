@@ -1,4 +1,4 @@
-## Generator-difference
+## Diff finder
 Utility for finding differences in configuration files.
 
 ## **Bages**
