@@ -1,13 +1,14 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID=23073ba66dde6422bb08fbf1e6786c935c709f66bdb925659b524f9550f3a185
+    - CC_TEST_REPORTER_ID=e480f275040d283c8fe625eb319895c7186a1eb567903a7b948bb25f6107a54a
 language: php
 
 php:
   - '7.2'
 
 install:
-  - make install
+  - composer self-update
+  - composer install
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
